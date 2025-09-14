@@ -1,176 +1,269 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Joel ❤️ Nury</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-      font-family: 'Arial', sans-serif;
-      overflow: hidden;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
+    <meta charset="UTF-8">
+    <title>Para mi Nury hermosa ❤️</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Variables CSS para una paleta de colores suave */
+        :root {
+            --color-principal: #ff6b81; /* Rosa claro vibrante */
+            --color-secundario: #ff4757; /* Rojo coral */
+            --color-fondo-claro: #fbeaff; /* Fondo lila muy claro */
+            --color-fondo-oscuro: #ffe6f2; /* Fondo rosa pastel */
+            --color-texto-claro: #ffffff;
+            --color-texto-oscuro: #333333;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, var(--color-fondo-claro), var(--color-fondo-oscuro));
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
 
-    .corazon {
-      position: absolute;
-      color: rgba(255, 255, 255, 0.9);
-      font-size: 20px;
-      animation: flotar 8s linear infinite;
-    }
+        /* --- Estilos de fondo y elementos flotantes (sin cambios) --- */
+        .efecto-luz { position: absolute; width: 300px; height: 300px; background: rgba(255, 107, 129, 0.5); border-radius: 50%; filter: blur(80px); opacity: 0.8; animation: flotarLuz 15s ease-in-out infinite alternate; }
+        .luz-1 { top: 10%; left: 15%; }
+        .luz-2 { bottom: 20%; right: 10%; animation-delay: 2s; }
+        .luz-3 { top: 50%; left: 60%; animation-delay: 4s; }
+        @keyframes flotarLuz { from { transform: translate(0, 0); } to { transform: translate(20px, 30px); } }
+        .corazon, .lirio, .estrella { position: absolute; animation: flotarElemento 12s linear infinite; z-index: 5; }
+        @keyframes flotarElemento { 0% { transform: translateY(100vh) scale(0.5); opacity: 0.5; } 50% { opacity: 1; } 100% { transform: translateY(-10vh) scale(1.2); opacity: 0; } }
+        .corazon { color: var(--color-principal); font-size: 25px; }
+        .lirio { color: #8e44ad; font-size: 35px; }
+        .estrella { color: #f1c40f; font-size: 15px; }
+        .estrella-fugaz { position: absolute; top: 5%; left: -20%; width: 50px; height: 2px; background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,1), rgba(255,255,255,0)); border-radius: 50%; opacity: 0; animation: estrellaFugaz 8s ease-out infinite; z-index: 5; box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.7); }
+        .estrella-fugaz::before { content: ''; position: absolute; top: 0; left: 0; width: 10px; height: 2px; background: white; border-radius: 50%; transform: translateX(-50%); }
+        @keyframes estrellaFugaz { 0% { left: -20%; top: 5%; opacity: 0; transform: rotate(25deg); } 10% { opacity: 1; } 20% { left: 110%; top: 25%; opacity: 0; transform: rotate(25deg); } 100% { opacity: 0; } }
+        
+        /* Mensaje inicial */
+        .mensaje { font-size: 2.2rem; color: var(--color-texto-claro); padding: 30px 40px; background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px); border-radius: 20px; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.3); cursor: pointer; transition: transform 0.4s ease, box-shadow 0.4s ease; z-index: 10; text-shadow: 1px 1px 5px rgba(0,0,0,0.3); line-height: 1.4; }
+        .mensaje h1 { font-family: 'Great Vibes', cursive; font-size: 3.5rem; margin-bottom: 10px; color: var(--color-principal); text-shadow: 2px 2px 8px rgba(0,0,0,0.4); }
+        .mensaje p { font-size: 1.5rem; margin-bottom: 15px; }
+        .mensaje span { display: block; margin-top: 20px; font-size: 1.2rem; font-weight: 700; }
+        .mensaje:hover { transform: scale(1.05); box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.3); }
 
-    @keyframes flotar {
-      from {
-        transform: translateY(100vh) scale(0.5);
-        opacity: 1;
-      }
-      to {
-        transform: translateY(-10vh) scale(1.2);
-        opacity: 0;
-      }
-    }
+        /* Contenedor principal de la sorpresa */
+        .sorpresa-container {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 90%;
+            max-width: 600px;
+            z-index: 20;
+        }
 
-    .mensaje {
-      font-size: 2rem;
-      color: white;
-      padding: 25px;
-      background: rgba(0,0,0,0.4);
-      border-radius: 20px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.3);
-      cursor: pointer;
-      transition: transform 0.3s ease;
-      z-index: 10;
-    }
+        /* MODIFICADO: Contenedor para apilar las fotos */
+        .fotos-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 4 / 5; /* Proporción para fotos verticales, ajústalo si es necesario */
+            margin-bottom: 20px;
+        }
 
-    .mensaje:hover {
-      transform: scale(1.05);
-      background: rgba(0,0,0,0.6);
-    }
+        .foto {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.8);
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            pointer-events: none; /* Evita que las fotos de atrás interfieran con clics */
+        }
+        
+        /* La primera foto tiene una animación de revelado especial */
+        #foto1 {
+            animation: revelar 3s ease forwards;
+            filter: brightness(0);
+        }
+        
+        /* La clase 'activa' hace visible la foto actual */
+        .foto.activa {
+            opacity: 1;
+            pointer-events: auto;
+        }
 
-    .foto-container {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-      z-index: 20;
-    }
+        @keyframes revelar {
+            0% { filter: brightness(0) blur(30px); transform: scale(0.8); opacity: 1; }
+            100% { filter: brightness(1) blur(0); transform: scale(1); opacity: 1; }
+        }
+        
+        .botones-container { display: flex; gap: 15px; justify-content: center; }
+        .sorpresa-boton { padding: 15px 25px; background: rgba(255, 107, 129, 0.7); backdrop-filter: blur(10px); border-radius: 20px; cursor: pointer; color: white; font-size: 1.1rem; font-weight: 700; transition: transform 0.3s ease, background-color 0.3s ease; z-index: 21; border: 1px solid rgba(255, 255, 255, 0.3); box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .sorpresa-boton:hover { transform: scale(1.1); background-color: var(--color-secundario); }
 
-    .foto {
-      max-width: 90%;
-      max-height: 70vh;
-      border-radius: 15px;
-      box-shadow: 0 0 30px rgba(0,0,0,0.8);
-      animation: revelar 3s ease forwards;
-      filter: brightness(0);
-    }
+        #frasesContainer { margin-top: 20px; min-height: 50px; }
+        .frase-sorpresa { font-size: 1.4rem; color: var(--color-texto-claro); background: rgba(0, 0, 0, 0.4); padding: 15px 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); text-shadow: 1px 1px 3px rgba(0,0,0,0.5); margin-bottom: 15px; animation: fadeIn 1.5s ease forwards; }
 
-    @keyframes revelar {
-      0% { filter: brightness(0) blur(30px); opacity: 0; }
-      50% { filter: brightness(0.6) blur(10px); opacity: 0.7; }
-      100% { filter: brightness(1) blur(0); opacity: 1; transform: scale(1); }
-    }
-
-    .texto {
-      margin-top: 20px;
-      font-size: 1.5rem;
-      color: white;
-      background: rgba(0,0,0,0.5);
-      padding: 15px;
-      border-radius: 15px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.5);
-      animation: fadeIn 2s ease forwards;
-      opacity: 0;
-    }
-
-    .final {
-      margin-top: 15px;
-      font-size: 1.3rem;
-      color: #fff6f6;
-      font-style: italic;
-      opacity: 0;
-      animation: fadeIn 3s ease forwards;
-      animation-delay: 2s;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
+        /* Estilos del mensaje final (sin cambios) */
+        .mensaje-final-container { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 30; width: 90%; max-width: 700px; text-align: center; }
+        .mensaje-final { color: var(--color-texto-claro); font-family: 'Great Vibes', cursive; font-size: 2.5rem; padding: 30px; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(8px); border-radius: 20px; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.2); opacity: 0; animation: fadeIn 2s ease forwards; text-shadow: 1px 1px 5px rgba(0,0,0,0.5); line-height: 1.5; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .mensaje-final-escribir { overflow: hidden; border-right: .15em solid orange; white-space: normal; margin: 0 auto; animation: escribirFinal 8s steps(280, end) forwards, parpadeoCursor .75s step-end infinite; }
+        @keyframes escribirFinal { from { width: 0 } to { width: 100% } }
+        @keyframes parpadeoCursor { from, to { border-color: transparent } 50% { border-color: orange; } }
+        
+        .particle { position: absolute; border-radius: 50%; opacity: 0; animation: explosion 1.2s ease-out forwards; }
+        @keyframes explosion { 0% { opacity: 1; transform: translate(0, 0) scale(1); } 100% { opacity: 0; transform: translate(var(--x), var(--y)) scale(0); } }
+    </style>
 </head>
 <body>
 
-  <div class="mensaje" onclick="mostrarFoto()">
-    💖 Feliz aniversario atrasado mi amor 💖 <br>
-    Nury, gracias por cada instante conmigo. <br>
-    Por muchos más momentos hermosos a tu lado. <br><br>
-    👉 Haz clic aquí para ver nuestra foto 👈
-  </div>
+    <div class="mensaje" onclick="iniciarSorpresa()">
+        <h1>¡Hola, mi Nury!</h1>
+        <p>Un pequeño detalle de mi corazón para ti.</p>
+        <span>👉 Haz clic aquí para la magia 👈</span>
+    </div>
 
-  <div id="fotoContainer" class="foto-container">
-    <img id="foto" class="foto" src="foto.jpg" alt="Joel y Nury">
-    <div class="texto">feliz aniversario mi amor ❤️<br>siempre esperaria por ti ❤️❤️</div>
-    <div class="texto">Gracias amorcito por formar parte de mi vida,<br>te amoo 3 millones❤️❤️</div>
-    <div class="final">Joel ❤️ Nury — Nuestro amor es infinito ✨</div>
-  </div>
+    <div class="efecto-luz luz-1"></div>
+    <div class="efecto-luz luz-2"></div>
+    <div class="efecto-luz luz-3"></div>
+    <div class="estrella-fugaz"></div>  
 
-  <audio id="musica" src="cancion.m4a.mpeg" preload="auto"></audio>
+    <div id="sorpresaContainer" class="sorpresa-container">
+        <div class="fotos-wrapper">
+            <img id="foto1" class="foto activa" src="foto.jpg" alt="Joel y Nury 1">
+            <img id="foto2" class="foto" src="foto4.jpeg" alt="Joel y Nury 2">
+            <img id="foto3" class="foto" src="foto1.jpeg" alt="Joel y Nury 3">
+            <img id="foto4" class="foto" src="foto3.jpeg" alt="Joel y Nury 4">
+        
+        </div>
+        
+        <div id="frasesContainer"></div>
 
-  <script>
-    function mostrarFoto() {
-      document.querySelector(".mensaje").style.display = "none";
-      let contenedor = document.getElementById("fotoContainer");
-      contenedor.style.display = "block";
+        <div class="botones-container">
+            <div id="sorpresaBoton1" class="sorpresa-boton" onclick="mostrarSiguiente(1, event)">💖 Siguiente recuerdo 💖</div>
+            <div id="sorpresaBoton2" class="sorpresa-boton" style="display: none;" onclick="mostrarSiguiente(2, event)">✨ Uno más ✨</div>
+            <div id="sorpresaBoton3" class="sorpresa-boton" style="display: none;" onclick="mostrarSiguiente(3, event)">💕 El penúltimo... 💕</div>
+            <div id="sorpresaBoton4" class="sorpresa-boton" style="display: none;" onclick="mostrarSiguiente(4, event)">🎆 ¡El gran final! 🎆</div>
+        </div>
+    </div>
 
-      let audio = document.getElementById("musica");
-      audio.play();
+    <div id="mensajeFinalContainer" class="mensaje-final-container">
+        <div class="mensaje-final" id="mensajeEscritura">
+             
+             <span style="font-size: 2rem;">Con todo mi amor, Joel.</span>
+        </div>
+    </div>
 
-      setTimeout(() => {
-        document.querySelector(".texto").style.opacity = "1";
-      }, 1500);
-      setTimeout(() => {
-        document.querySelector(".final").style.opacity = "1";
-      }, 2500);
-    }
+    <audio id="musica" src="cancion.m4a.mpeg" preload="auto" loop></audio>
 
-    function crearCorazon() {
-      const corazon = document.createElement("div");
-      corazon.classList.add("corazon");
-      corazon.innerHTML = "❤️";
-      corazon.style.left = Math.random() * 100 + "vw";
-      corazon.style.fontSize = Math.random() * 20 + 20 + "px";
-      corazon.style.animationDuration = (Math.random() * 3 + 5) + "s";
-      document.body.appendChild(corazon);
+    <script>
+        // MODIFICADO: Ahora hay 4 frases, una para cada clic de botón
+        const frases = [
+            "Por mas momentos magicos.",
+            "Y aquí, cada risa contigo construía nuestro paraíso.",
+            "Recuerdos como este siempre se guardaran en mi alma y corazon",
+            "Eres esa hermosa casualidad que se convirtió en el plan perfecto de mi vida, el faro que guía mis días y la melodía que da sentido a mi existencia mi nury.<br>."
+        ];
 
-      setTimeout(() => {
-        corazon.remove();
-      }, 8000);
-    }
+        function iniciarSorpresa() {
+            document.querySelector(".mensaje").style.display = "none";
+            document.getElementById("sorpresaContainer").style.display = "flex";
+            document.getElementById("musica").play();
+        }
 
-    setInterval(crearCorazon, 500);
-    // Función para que el volumen suba y baje lentamente
-  function suavizarVolumen(audio) {
-    let incremento = 0.005; // velocidad de cambio de volumen
-    let subiendo = true;
+        function mostrarSiguiente(numero, event) {
+            const botonActual = document.getElementById(`sorpresaBoton${numero}`);
+            botonActual.style.display = 'none';
 
-    setInterval(() => {
-      if (subiendo) {
-        audio.volume += incremento;
-        if (audio.volume >= 1) subiendo = false;
-      } else {
-        audio.volume -= incremento;
-        if (audio.volume <= 0.2) subiendo = true;
-      }
-    }, 100); // cada 100ms ajusta el volumen
-  }
-  </script>
+            // Limpia la frase anterior y muestra la nueva
+            const frasesContainer = document.getElementById('frasesContainer');
+            frasesContainer.innerHTML = '';
+            agregarFrase(frases[numero - 1]);
 
+            // Si no es el último botón, muestra la siguiente foto y el siguiente botón
+            if (numero < 4) {
+                const fotoActual = document.getElementById(`foto${numero}`);
+                const fotoSiguiente = document.getElementById(`foto${numero + 1}`);
+                
+                fotoActual.classList.remove('activa');
+                fotoSiguiente.classList.add('activa');
+                
+                const proximoBoton = document.getElementById(`sorpresaBoton${numero + 1}`);
+                if (proximoBoton) {
+                    setTimeout(() => {
+                        proximoBoton.style.display = 'block';
+                    }, 1500); // Espera para dar tiempo a leer
+                }
+            } else { // Si es el último botón (el número 4)
+                lanzarFuegosArtificiales(event.clientX, event.clientY);
+                setTimeout(mostrarMensajeFinal, 1500);
+            }
+        }
+        
+        function agregarFrase(texto) {
+            const container = document.getElementById('frasesContainer');
+            const p = document.createElement('p');
+            p.className = 'frase-sorpresa';
+            p.innerHTML = texto;
+            container.appendChild(p);
+        }
+
+        function mostrarMensajeFinal() {
+            let mensajeFinalContenedor = document.getElementById("mensajeFinalContainer");
+            mensajeFinalContenedor.style.display = "block";
+
+            let mensajeFinal = document.getElementById("mensajeEscritura");
+            mensajeFinal.classList.remove("mensaje-final-escribir");
+            void mensajeFinal.offsetWidth; 
+            mensajeFinal.classList.add("mensaje-final-escribir");
+        }
+
+        function lanzarFuegosArtificiales(x, y) {
+            const particleCount = 50;
+            const colors = ['#ff6b81', '#ff4757', '#f1c40f', '#8e44ad', '#ffffff'];
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                const angle = Math.random() * 360;
+                const distance = Math.random() * 150 + 50;
+                const translateX = Math.cos(angle * (Math.PI / 180)) * distance;
+                const translateY = Math.sin(angle * (Math.PI / 180)) * distance;
+                particle.style.setProperty('--x', `${translateX}px`);
+                particle.style.setProperty('--y', `${translateY}px`);
+                particle.style.left = `${x}px`;
+                particle.style.top = `${y}px`;
+                const size = Math.random() * 8 + 4;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                document.body.appendChild(particle);
+                setTimeout(() => { particle.remove(); }, 1200);
+            }
+        }
+
+        function crearElemento(clase, contenido) {
+            const elemento = document.createElement("div");
+            elemento.classList.add(clase);
+            elemento.innerHTML = contenido;
+            elemento.style.left = Math.random() * 100 + "vw";
+            elemento.style.animationDuration = (Math.random() * 8 + 10) + "s";
+            elemento.style.animationDelay = (Math.random() * 5) + "s";
+            document.body.appendChild(elemento);
+            setTimeout(() => { elemento.remove(); }, 12000);
+        }
+
+        setInterval(() => crearElemento("corazon", "❤️"), 800);
+        setInterval(() => crearElemento("lirio", "💜"), 2500);
+        setInterval(() => crearElemento("estrella", "✨"), 1000);
+    </script>
 </body>
 </html>
