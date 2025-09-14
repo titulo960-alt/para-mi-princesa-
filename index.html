@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Joel ❤️ Nury</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      font-family: 'Arial', sans-serif;
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .corazon {
+      position: absolute;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 20px;
+      animation: flotar 8s linear infinite;
+    }
+
+    @keyframes flotar {
+      from {
+        transform: translateY(100vh) scale(0.5);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(-10vh) scale(1.2);
+        opacity: 0;
+      }
+    }
+
+    .mensaje {
+      font-size: 2rem;
+      color: white;
+      padding: 25px;
+      background: rgba(0,0,0,0.4);
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      z-index: 10;
+    }
+
+    .mensaje:hover {
+      transform: scale(1.05);
+      background: rgba(0,0,0,0.6);
+    }
+
+    .foto-container {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 20;
+    }
+
+    .foto {
+      max-width: 90%;
+      max-height: 70vh;
+      border-radius: 15px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.8);
+      animation: revelar 3s ease forwards;
+      filter: brightness(0);
+    }
+
+    @keyframes revelar {
+      0% { filter: brightness(0) blur(30px); opacity: 0; }
+      50% { filter: brightness(0.6) blur(10px); opacity: 0.7; }
+      100% { filter: brightness(1) blur(0); opacity: 1; transform: scale(1); }
+    }
+
+    .texto {
+      margin-top: 20px;
+      font-size: 1.5rem;
+      color: white;
+      background: rgba(0,0,0,0.5);
+      padding: 15px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+      animation: fadeIn 2s ease forwards;
+      opacity: 0;
+    }
+
+    .final {
+      margin-top: 15px;
+      font-size: 1.3rem;
+      color: #fff6f6;
+      font-style: italic;
+      opacity: 0;
+      animation: fadeIn 3s ease forwards;
+      animation-delay: 2s;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="mensaje" onclick="mostrarFoto()">
+    💖 Feliz aniversario atrasado mi amor 💖 <br>
+    Nury, gracias por cada instante conmigo. <br>
+    Por muchos más momentos hermosos a tu lado. <br><br>
+    👉 Haz clic aquí para ver nuestra foto 👈
+  </div>
+
+  <div id="fotoContainer" class="foto-container">
+    <img id="foto" class="foto" src="foto.jpg" alt="Joel y Nury">
+    <div class="texto">feliz aniversario mi amor ❤️<br>siempre esperaria por ti ❤️❤️</div>
+    <div class="texto">Gracias amorcito por formar parte de mi vida,<br>te amoo 3 millones❤️❤️</div>
+    <div class="final">Joel ❤️ Nury — Nuestro amor es infinito ✨</div>
+  </div>
+
+  <audio id="musica" src="cancion.m4a.mpeg" preload="auto"></audio>
+
+  <script>
+    function mostrarFoto() {
+      document.querySelector(".mensaje").style.display = "none";
+      let contenedor = document.getElementById("fotoContainer");
+      contenedor.style.display = "block";
+
+      let audio = document.getElementById("musica");
+      audio.play();
+
+      setTimeout(() => {
+        document.querySelector(".texto").style.opacity = "1";
+      }, 1500);
+      setTimeout(() => {
+        document.querySelector(".final").style.opacity = "1";
+      }, 2500);
+    }
+
+    function crearCorazon() {
+      const corazon = document.createElement("div");
+      corazon.classList.add("corazon");
+      corazon.innerHTML = "❤️";
+      corazon.style.left = Math.random() * 100 + "vw";
+      corazon.style.fontSize = Math.random() * 20 + 20 + "px";
+      corazon.style.animationDuration = (Math.random() * 3 + 5) + "s";
+      document.body.appendChild(corazon);
+
+      setTimeout(() => {
+        corazon.remove();
+      }, 8000);
+    }
+
+    setInterval(crearCorazon, 500);
+    // Función para que el volumen suba y baje lentamente
+  function suavizarVolumen(audio) {
+    let incremento = 0.005; // velocidad de cambio de volumen
+    let subiendo = true;
+
+    setInterval(() => {
+      if (subiendo) {
+        audio.volume += incremento;
+        if (audio.volume >= 1) subiendo = false;
+      } else {
+        audio.volume -= incremento;
+        if (audio.volume <= 0.2) subiendo = true;
+      }
+    }, 100); // cada 100ms ajusta el volumen
+  }
+  </script>
+
+</body>
+</html>
